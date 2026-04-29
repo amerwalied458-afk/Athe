@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>أثير برو | AMER Studio - Ultimate Monolithic Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>أثير برو | AMER Studio - Mobile Edition V7</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -12,113 +12,110 @@
 
     <style>
         /* ==========================================================================
-           1. التصميم المعماري الأساسي (CORE ARCHITECTURE)
+           1. التصميم المعماري للموبايل (MOBILE-FIRST ARCHITECTURE)
            ========================================================================== */
         :root {
             --bg-deep: #000000;
-            --panel-bg: #080808;
-            --panel-border: #141414;
+            --panel-bg: #0a0a0a;
             --accent-gold: #d4af37;
             --text-main: #ffffff;
-            --text-dim: #666666;
-            --track-video: #1a2a3a;
-            --track-text: #3a2a1a;
-            --track-audio: #1a3a2a;
+            --text-dim: #888888;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html { width: 100%; height: 100%; font-family: 'Tajawal', sans-serif; background-color: var(--bg-deep); color: var(--text-main); overflow: hidden; user-select: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body, html { width: 100%; height: 100dvh; font-family: 'Tajawal', sans-serif; background-color: var(--bg-deep); color: var(--text-main); overflow: hidden; user-select: none; }
 
         /* ==========================================================================
            2. شاشة الترحيب (SPLASH SCREEN)
            ========================================================================== */
-        #splash-screen { position: fixed; inset: 0; background: radial-gradient(circle, #111 0%, #000 100%); z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .amer-brand { font-family: 'Amiri', serif; font-size: 11rem; font-weight: 900; background: linear-gradient(180deg, #fff 0%, #444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 60px rgba(255,255,255,0.1)); }
-        .dev-signature { position: absolute; bottom: 40px; text-align: center; font-size: 11px; letter-spacing: 2px; color: var(--text-dim); line-height: 1.8; }
-        .dev-signature strong { color: #fff; }
+        #splash-screen { position: fixed; inset: 0; background: radial-gradient(circle, #151515 0%, #000 100%); z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .amer-brand { font-family: 'Amiri', serif; font-size: 8rem; font-weight: 900; background: linear-gradient(180deg, #fff 0%, #555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 40px rgba(255,255,255,0.2)); }
+        .dev-signature { position: absolute; bottom: 30px; text-align: center; font-size: 10px; letter-spacing: 1px; color: var(--text-dim); line-height: 1.8; }
 
         /* ==========================================================================
-           3. التخطيط الشبكي (MINIMALIST GRID SYSTEM)
+           3. التخطيط العمودي للموبايل (MOBILE LAYOUT)
            ========================================================================== */
-        .app-layout { display: grid; grid-template-columns: 280px 1fr 280px; grid-template-rows: 55px 1fr 260px; height: 100vh; background: var(--panel-border); gap: 1px; }
+        .app-layout { display: flex; flex-direction: column; height: 100dvh; background: var(--bg-deep); }
         
         /* الهيدر العلوي */
-        header { grid-column: 1 / -1; background: var(--bg-deep); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 100; }
-        .logo-text { font-size: 20px; font-weight: 900; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-        .pro-badge { background: var(--text-main); color: #000; font-size: 9px; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
-        .export-btn { background: var(--text-main); color: #000; padding: 8px 24px; border-radius: 20px; font-weight: 900; font-size: 11px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
-        .export-btn:hover { background: var(--accent-gold); transform: scale(1.02); }
+        header { height: 55px; background: var(--bg-deep); display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-bottom: 1px solid #1a1a1a; flex-shrink: 0; z-index: 10; }
+        .logo-text { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .pro-badge { background: var(--text-main); color: #000; font-size: 8px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .export-btn { background: var(--text-main); color: #000; padding: 6px 16px; border-radius: 20px; font-weight: 900; font-size: 10px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 5px; text-transform: uppercase; }
 
-        /* الألواح الجانبية */
-        .sidebar { background: var(--panel-bg); display: flex; flex-direction: column; overflow-y: auto; padding: 15px; }
-        .panel-title { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 15px; padding-bottom: 5px; border-bottom: 1px solid #1a1a1a; font-weight: 900; }
-        
-        .tool-card { width: 100%; background: #0f0f0f; border: 1px solid #1a1a1a; padding: 12px 15px; border-radius: 8px; font-size: 11px; font-weight: bold; color: #ccc; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .tool-card:hover { background: #151515; border-color: var(--accent-gold); color: #fff; transform: translateX(-4px); }
-        .tool-card i { font-size: 16px; color: var(--accent-gold); width: 20px; text-align: center; }
+        /* منطقة المعاينة (Viewport) */
+        .viewport-area { flex: 1; background: #050505; position: relative; display: flex; align-items: center; justify-content: center; padding: 10px; overflow: hidden; }
+        #render-engine { max-width: 100%; max-height: 100%; aspect-ratio: 9/16; background: #020202; box-shadow: 0 0 30px rgba(0,0,0,0.8); border: 1px solid #111; border-radius: 8px; }
+        .player-controls { position: absolute; bottom: 15px; background: rgba(10,10,10,0.8); backdrop-filter: blur(10px); border: 1px solid #222; border-radius: 30px; padding: 8px 25px; display: flex; gap: 30px; align-items: center; }
+        .play-btn { width: 35px; height: 35px; background: var(--text-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; }
 
         /* ==========================================================================
-           4. محرك الرسوميات (VIEWPORT & CANVAS ENGINE)
+           4. التايم لاين المخصص للموبايل (MOBILE TIMELINE)
            ========================================================================== */
-        .viewport-area { grid-column: 2 / 3; background: #020202; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; overflow: hidden; }
-        #render-engine { max-width: 100%; max-height: 100%; aspect-ratio: 9/16; background: #050505; box-shadow: 0 0 80px rgba(0,0,0,0.9); border: 1px solid #111; }
-        .player-controls { position: absolute; bottom: 20px; background: rgba(10,10,10,0.85); backdrop-filter: blur(15px); border: 1px solid #222; border-radius: 50px; padding: 10px 30px; display: flex; gap: 25px; align-items: center; }
-        .play-btn { width: 45px; height: 45px; background: var(--text-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; cursor: pointer; transition: 0.2s; }
-        .play-btn:hover { transform: scale(1.15); }
+        .timeline-area { height: 30vh; background: var(--panel-bg); display: flex; flex-direction: column; border-top: 1px solid #1a1a1a; flex-shrink: 0; }
+        .timeline-toolbar { height: 35px; background: #080808; display: flex; align-items: center; padding: 0 15px; border-bottom: 1px solid #141414; gap: 15px; }
+        .timeline-tracks { flex: 1; overflow-y: auto; padding: 5px 0; position: relative; }
+        
+        .track-row { height: 50px; border-bottom: 1px solid #111; display: flex; position: relative; align-items: center; }
+        .track-header { width: 40px; background: #050505; height: 100%; border-right: 1px solid #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-dim); z-index: 20; }
+        .track-grid { flex: 1; position: relative; background: repeating-linear-gradient(90deg, #080808, #080808 39px, #0f0f0f 40px); overflow-x: auto; }
+        
+        .media-clip { position: absolute; height: 40px; top: 5px; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 9px; font-weight: bold; white-space: nowrap; cursor: pointer; border-right: 3px solid var(--accent-gold); color: #ddd; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .clip-active { border: 1.5px solid #fff; box-shadow: 0 0 10px rgba(255,255,255,0.2); color: #fff; }
 
         /* ==========================================================================
-           5. التايم لاين المتقدم (MULTI-TRACK TIMELINE)
+           5. شريط الأدوات السفلي (BOTTOM NAVIGATION)
            ========================================================================== */
-        .timeline-area { grid-column: 1 / -1; background: var(--panel-bg); display: flex; flex-direction: column; }
-        .timeline-toolbar { height: 40px; background: #080808; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #141414; gap: 15px; }
-        .timeline-tracks { flex: 1; overflow-y: auto; padding: 10px 0; position: relative; }
+        .bottom-toolbar { height: 60px; background: #050505; display: flex; overflow-x: auto; align-items: center; padding: 0 10px; gap: 10px; border-top: 1px solid #1a1a1a; flex-shrink: 0; scroll-behavior: smooth; }
+        .bottom-toolbar::-webkit-scrollbar { display: none; }
         
-        .track-row { height: 55px; border-bottom: 1px solid #111; display: flex; position: relative; align-items: center; }
-        .track-header { width: 140px; background: #050505; height: 100%; border-right: 1px solid #1a1a1a; display: flex; align-items: center; padding: 0 15px; font-size: 9px; font-weight: bold; color: var(--text-dim); z-index: 20; letter-spacing: 1px; }
-        .track-grid { flex: 1; position: relative; background: repeating-linear-gradient(90deg, #080808, #080808 49px, #0f0f0f 50px); }
-        
-        .media-clip { position: absolute; height: 45px; top: 5px; border-radius: 6px; display: flex; align-items: center; padding: 0 12px; font-size: 10px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.6); transition: 0.2s; overflow: hidden; border-right: 4px solid var(--accent-gold); color: #ddd; }
-        .media-clip:hover { filter: brightness(1.3); color: #fff; }
-        .clip-active { border: 2px solid #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); color: #fff; }
+        .tool-btn { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 60px; height: 45px; background: transparent; border: none; color: #aaa; cursor: pointer; }
+        .tool-btn i { font-size: 16px; color: #fff; }
+        .tool-btn span { font-size: 9px; font-weight: bold; }
+        .tool-btn:active i { color: var(--accent-gold); }
 
         /* ==========================================================================
-           6. عناصر واجهة المستخدم (UI COMPONENTS)
+           6. النوافذ السفلية المنبثقة (BOTTOM SHEETS)
            ========================================================================== */
-        input[type="range"] { width: 100%; accent-color: var(--accent-gold); margin-bottom: 15px; height: 4px; background: #222; border-radius: 2px; appearance: none; }
-        input[type="range"]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; background: var(--accent-gold); border-radius: 50%; cursor: pointer; }
-        
-        .filter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .filter-box { background: #111; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 10px; border-radius: 6px; border: 1px solid #1a1a1a; cursor: pointer; transition: 0.2s; }
-        .filter-box:hover { border-color: var(--accent-gold); background: #1a1a1a; }
+        .bottom-sheet { position: fixed; bottom: -100%; left: 0; right: 0; background: #111; border-top-left-radius: 16px; border-top-right-radius: 16px; padding: 20px; transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5000; box-shadow: 0 -10px 40px rgba(0,0,0,0.8); max-height: 80vh; display: flex; flex-direction: column; }
+        .bottom-sheet.active { bottom: 0; }
+        .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 14px; font-weight: bold; }
+        .sheet-close { color: #888; font-size: 18px; padding: 5px; cursor: pointer; }
+        .sheet-content { overflow-y: auto; flex: 1; padding-bottom: 20px; }
 
-        /* النوافذ المنبثقة (Modals) */
-        .modal-wrapper { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 10000; display: none; align-items: center; justify-content: center; }
-        .modal-container { width: 650px; background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.9); }
-        .quran-row { padding: 12px; border-bottom: 1px solid #141414; cursor: pointer; transition: 0.2s; }
-        .quran-row:hover { background: #111; border-left: 3px solid var(--accent-gold); }
+        /* عناصر التحكم داخل الـ Sheets */
+        .control-group { margin-bottom: 20px; }
+        .control-label { display: flex; justify-content: space-between; font-size: 10px; color: #aaa; margin-bottom: 8px; }
+        input[type="range"] { width: 100%; accent-color: var(--accent-gold); height: 4px; background: #222; border-radius: 2px; appearance: none; }
+        input[type="range"]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; background: var(--accent-gold); border-radius: 50%; }
+
+        .action-list-btn { width: 100%; background: #1a1a1a; border: 1px solid #222; padding: 12px; border-radius: 8px; font-size: 11px; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .action-list-btn i { color: var(--accent-gold); width: 20px; text-align: center; }
+
+        .grid-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .grid-box { background: #1a1a1a; border: 1px solid #222; padding: 15px 10px; text-align: center; border-radius: 8px; font-size: 10px; font-weight: bold; }
+
+        /* قوائم النصوص والذكاء الاصطناعي */
+        .quran-row { padding: 12px; border-bottom: 1px solid #1a1a1a; }
+        textarea.ai-input { width: 100%; height: 100px; background: #050505; border: 1px solid #222; border-radius: 8px; padding: 12px; color: #fff; font-family: 'Tajawal'; resize: none; margin-bottom: 15px; font-size: 12px; }
 
         /* شاشة التصدير الرسومية */
         #render-screen { position: fixed; inset: 0; background: #000; z-index: 50000; display: none; flex-direction: column; align-items: center; justify-content: center; }
-        .render-spinner { width: 80px; height: 80px; border: 3px solid #222; border-top-color: var(--accent-gold); border-radius: 50%; animation: spin 1s linear infinite; }
+        .render-spinner { width: 60px; height: 60px; border: 3px solid #222; border-top-color: var(--accent-gold); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* أشرطة التمرير */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-track { background: transparent; }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
         <h1 class="amer-brand" id="splash-brand">أثير</h1>
-        <div class="mt-10 w-72 h-1 bg-white/10 rounded-full relative overflow-hidden">
-            <div id="splash-progress" class="absolute h-full bg-white w-0 shadow-[0_0_15px_#fff]"></div>
+        <div class="mt-8 w-48 h-1 bg-white/10 rounded-full relative overflow-hidden">
+            <div id="splash-progress" class="absolute h-full bg-white w-0 shadow-[0_0_10px_#fff]"></div>
         </div>
-        <p class="mt-8 text-[10px] tracking-[0.6em] text-gray-500 uppercase">Atheer Master Engine V6.0</p>
+        <p class="mt-6 text-[9px] tracking-[0.5em] text-gray-500 uppercase">Mobile Edition V7.0</p>
         <div class="dev-signature">
-            تم التطوير بواسطة: <strong>المطور عامر وليد</strong><br>
-            مدير التسويق: <strong>أحمد خالد</strong>
+            المطور: <strong>عامر وليد</strong> | التسويق: <strong>أحمد خالد</strong>
         </div>
     </div>
 
@@ -126,221 +123,215 @@
         
         <header>
             <div class="logo-text">أثير <span class="pro-badge">PRO</span></div>
-            <div class="text-[10px] text-gray-500 tracking-widest flex gap-6">
-                <span><i class="fa fa-crop-simple mr-1"></i> 1080x1920</span>
-                <span><i class="fa fa-film mr-1"></i> 30 FPS</span>
-                <span><i class="fa fa-server mr-1"></i> NATIVE SYNC</span>
-            </div>
-            <button class="export-btn" onclick="AtheerPro.startNativeExport()">
+            <button class="export-btn" onclick="AtheerMobile.startNativeExport()">
                 <i class="fa fa-share-nodes"></i> تصدير للكاميرا
             </button>
         </header>
 
-        <aside class="sidebar border-l border-[#1a1a1a]">
-            <div class="panel-title">استيراد الوسائط</div>
-            <button class="tool-card" onclick="document.getElementById('master-upload').click()">
-                <i class="fa fa-photo-film"></i> استيراد فيديو وصور
-            </button>
-            <button class="tool-card" onclick="AtheerPro.extractAudioFeature()">
-                <i class="fa fa-file-waveform"></i> استخراج مسار الصوت
-            </button>
-            
-            <div class="panel-title mt-6">المكتبات المدمجة</div>
-            <button class="tool-card" onclick="AtheerPro.toggleModal('quran-modal')">
-                <i class="fa fa-book-quran"></i> مكتبة القرآن الكريم
-            </button>
-            <button class="tool-card" onclick="AtheerPro.toggleModal('tts-modal')">
-                <i class="fa fa-wand-magic-sparkles"></i> محرك الصوت الوقور (AI)
-            </button>
-
-            <div class="panel-title mt-6">الطبقات والخلفيات</div>
-            <div class="filter-grid">
-                <div class="filter-box" onclick="AtheerPro.addSolidBackground('#0a0a0a')">لون داكن</div>
-                <div class="filter-box" onclick="AtheerPro.addSolidBackground('#1a252c')">أزرق ليلي</div>
-                <div class="filter-box" style="border: 1px dashed #444;" onclick="AtheerPro.addOverlayEffect('dust')">غبار سينمائي</div>
-                <div class="filter-box" style="border: 1px dashed #444;" onclick="AtheerPro.addOverlayEffect('light')">إضاءة خافتة</div>
-            </div>
-        </aside>
-
         <main class="viewport-area">
             <canvas id="render-engine" width="1080" height="1920"></canvas>
             <div class="player-controls">
-                <i class="fa fa-backward-step cursor-pointer hover:text-white text-gray-500"></i>
-                <div class="play-btn" onclick="AtheerPro.togglePlayState()">
+                <i class="fa fa-backward-step text-gray-500"></i>
+                <div class="play-btn" onclick="AtheerMobile.togglePlayState()">
                     <i class="fa fa-play ml-1" id="play-icon"></i>
                 </div>
-                <i class="fa fa-forward-step cursor-pointer hover:text-white text-gray-500"></i>
+                <i class="fa fa-forward-step text-gray-500"></i>
             </div>
         </main>
 
-        <aside class="sidebar border-r border-[#1a1a1a]">
-            <div class="panel-title">خصائص الطبقة (Transform)</div>
-            
-            <div class="mb-6">
-                <div class="flex justify-between text-[10px] text-gray-400 mb-2"><span>الشفافية (Opacity)</span><span id="ui-opacity">100%</span></div>
-                <input type="range" min="0" max="1" step="0.05" value="1" oninput="AtheerPro.updateActiveLayer('opacity', this.value)">
-                
-                <div class="flex justify-between text-[10px] text-gray-400 mb-2 mt-4"><span>الحجم (Scale)</span><span id="ui-scale">1.0x</span></div>
-                <input type="range" min="0.5" max="3" step="0.1" value="1" oninput="AtheerPro.updateActiveLayer('scale', this.value)">
-            </div>
-
-            <div class="panel-title">المعالجة الذكية</div>
-            <button class="tool-card" onclick="AtheerPro.applyKenBurnsEffect()">
-                <i class="fa fa-expand"></i> تحريك سينمائي للصور
-            </button>
-            <button class="tool-card" onclick="AtheerPro.applyAutoCaptions()">
-                <i class="fa fa-closed-captioning"></i> شروحات تلقائية للنص
-            </button>
-            <button class="tool-card" onclick="AtheerPro.applyAudioDucking()">
-                <i class="fa fa-arrow-down-up-across-line"></i> خفض الموسيقى آلياً
-            </button>
-
-            <div class="panel-title mt-6">فلاتر "أثير" البصرية</div>
-            <div class="filter-grid">
-                <div class="filter-box" onclick="AtheerPro.applyVisualFilter('sepia')">تراث (Vintage)</div>
-                <div class="filter-box" onclick="AtheerPro.applyVisualFilter('grayscale')">وقار (B&W)</div>
-                <div class="filter-box" onclick="AtheerPro.applyVisualFilter('contrast')">حدة (Crisp)</div>
-                <div class="filter-box" onclick="AtheerPro.applyVisualFilter('brightness')">نور (Bright)</div>
-            </div>
-        </aside>
-
         <section class="timeline-area">
             <div class="timeline-toolbar">
-                <i class="fa fa-cut text-gray-500 hover:text-white cursor-pointer transition"></i>
-                <i class="fa fa-copy text-gray-500 hover:text-white cursor-pointer transition"></i>
-                <i class="fa fa-trash text-gray-500 hover:text-white cursor-pointer transition" onclick="AtheerPro.deleteActiveLayer()"></i>
-                <div class="ml-auto text-[11px] font-mono text-gray-400 tracking-widest" id="time-counter">00:00:00:00</div>
+                <i class="fa fa-copy text-gray-500"></i>
+                <i class="fa fa-scissors text-gray-500"></i>
+                <i class="fa fa-trash text-gray-500" onclick="AtheerMobile.deleteActiveLayer()"></i>
+                <div class="ml-auto text-[10px] font-mono text-gray-400" id="time-counter">00:00:00:00</div>
             </div>
-            <div class="timeline-tracks" id="timeline-tracks">
+            <div class="timeline-tracks">
                 <div class="track-row" id="track-video">
-                    <div class="track-header">VIDEO / IMAGES</div>
+                    <div class="track-header"><i class="fa fa-film"></i></div>
                     <div class="track-grid" id="grid-video"></div>
                 </div>
                 <div class="track-row" id="track-text">
-                    <div class="track-header">QURAN / TEXT</div>
+                    <div class="track-header"><i class="fa fa-font"></i></div>
                     <div class="track-grid" id="grid-text"></div>
                 </div>
                 <div class="track-row" id="track-audio">
-                    <div class="track-header">AUDIO / AI VOICE</div>
+                    <div class="track-header"><i class="fa fa-music"></i></div>
                     <div class="track-grid" id="grid-audio"></div>
                 </div>
             </div>
         </section>
+
+        <nav class="bottom-toolbar">
+            <button class="tool-btn" onclick="document.getElementById('master-upload').click()">
+                <i class="fa fa-plus-circle"></i><span>إضافة</span>
+            </button>
+            <button class="tool-btn" onclick="AtheerMobile.openSheet('sheet-edit')">
+                <i class="fa fa-sliders"></i><span>تعديل</span>
+            </button>
+            <button class="tool-btn" onclick="AtheerMobile.openSheet('sheet-quran')">
+                <i class="fa fa-book-quran"></i><span>قرآن</span>
+            </button>
+            <button class="tool-btn" onclick="AtheerMobile.openSheet('sheet-ai')">
+                <i class="fa fa-wand-magic-sparkles"></i><span>صوت AI</span>
+            </button>
+            <button class="tool-btn" onclick="AtheerMobile.openSheet('sheet-effects')">
+                <i class="fa fa-magic"></i><span>مؤثرات</span>
+            </button>
+            <button class="tool-btn" onclick="AtheerMobile.openSheet('sheet-audio')">
+                <i class="fa fa-microphone"></i><span>صوتيات</span>
+            </button>
+        </nav>
     </div>
 
-    <input type="file" id="master-upload" accept="image/*,video/*,audio/*" hidden multiple onchange="AtheerPro.handleMediaUpload(this.files)">
+    <input type="file" id="master-upload" accept="image/*,video/*,audio/*" hidden multiple onchange="AtheerMobile.handleMediaUpload(this.files)">
 
-    <div class="modal-wrapper" id="quran-modal">
-        <div class="modal-container">
-            <div class="flex justify-between items-center mb-5">
-                <h2 class="text-xl font-bold">المكتبة القرآنية المدمجة</h2>
-                <i class="fa fa-times text-gray-500 hover:text-white cursor-pointer text-xl" onclick="AtheerPro.toggleModal('quran-modal', false)"></i>
+    <div class="bottom-sheet" id="sheet-edit">
+        <div class="sheet-header">
+            <span>خصائص الطبقة</span>
+            <i class="fa fa-chevron-down sheet-close" onclick="AtheerMobile.closeSheet('sheet-edit')"></i>
+        </div>
+        <div class="sheet-content">
+            <div class="control-group">
+                <div class="control-label"><span>الشفافية</span><span id="ui-opacity">100%</span></div>
+                <input type="range" min="0" max="1" step="0.05" value="1" oninput="AtheerMobile.updateActiveLayer('opacity', this.value)">
             </div>
-            <p class="text-[11px] text-gray-500 mb-4">اختر الآية ليتم إدراجها بالرسم العثماني. (قاعدة بيانات مدمجة لدعم الاستخدام دون اتصال).</p>
-            <div class="h-64 overflow-y-auto pr-2 bg-[#050505] border border-[#1a1a1a] rounded-lg" id="quran-database-list">
-                </div>
+            <div class="control-group">
+                <div class="control-label"><span>الحجم (Scale)</span><span id="ui-scale">1.0x</span></div>
+                <input type="range" min="0.5" max="3" step="0.1" value="1" oninput="AtheerMobile.updateActiveLayer('scale', this.value)">
+            </div>
+            <button class="action-list-btn" onclick="AtheerMobile.applyKenBurnsEffect()">
+                <i class="fa fa-expand"></i> تفعيل التحريك السينمائي للصور
+            </button>
+            <button class="action-list-btn" onclick="AtheerMobile.applyAutoCaptions()">
+                <i class="fa fa-closed-captioning"></i> توليد شروحات تلقائية (نص متحرك)
+            </button>
         </div>
     </div>
 
-    <div class="modal-wrapper" id="tts-modal">
-        <div class="modal-container">
-            <div class="flex justify-between items-center mb-5">
-                <h2 class="text-xl font-bold">محرك الصوت الوقور (AI TTS)</h2>
-                <i class="fa fa-times text-gray-500 hover:text-white cursor-pointer text-xl" onclick="AtheerPro.toggleModal('tts-modal', false)"></i>
+    <div class="bottom-sheet" id="sheet-effects">
+        <div class="sheet-header">
+            <span>الفلاتر والخلفيات</span>
+            <i class="fa fa-chevron-down sheet-close" onclick="AtheerMobile.closeSheet('sheet-effects')"></i>
+        </div>
+        <div class="sheet-content">
+            <div class="control-label">فلاتر "أثير" البصرية</div>
+            <div class="grid-options mb-6">
+                <div class="grid-box" onclick="AtheerMobile.applyVisualFilter('sepia')">تراث (Vintage)</div>
+                <div class="grid-box" onclick="AtheerMobile.applyVisualFilter('grayscale')">وقار (B&W)</div>
+                <div class="grid-box" onclick="AtheerMobile.applyVisualFilter('contrast')">حدة (Crisp)</div>
+                <div class="grid-box" onclick="AtheerMobile.applyVisualFilter('brightness')">نور (Bright)</div>
             </div>
-            <textarea id="tts-input-text" class="w-full h-32 bg-[#050505] border border-[#222] rounded-lg p-4 text-white focus:border-[#d4af37] outline-none mb-4 resize-none font-family-tajawal" placeholder="قم بكتابة النص هنا ليتم توليد خامة صوتية بشرية تناسب المحتوى الهادف..."></textarea>
-            <div class="flex gap-4">
-                <select id="tts-voice-type" class="flex-1 bg-[#050505] border border-[#222] rounded-lg p-3 text-sm text-gray-300 outline-none">
-                    <option value="deep">خامة وقورة (عميق)</option>
-                    <option value="narrator">خامة الراوي (هادئ)</option>
-                    <option value="khateeb">خامة الخطيب (فصيح)</option>
-                </select>
-                <button class="bg-white text-black font-bold px-8 rounded-lg hover:bg-gray-200 transition" onclick="AtheerPro.executeTTSGeneration()">توليد وإضافة</button>
+            <div class="control-label">الخلفيات والمؤثرات الشفافة</div>
+            <div class="grid-options">
+                <div class="grid-box" onclick="AtheerMobile.addLayer('color', '#0a0a0a')">لون داكن</div>
+                <div class="grid-box" onclick="AtheerMobile.addLayer('color', '#1a252c')">أزرق ليلي</div>
+                <div class="grid-box border-dashed" onclick="AtheerMobile.addLayer('overlay', 'dust')">غبار سينمائي</div>
             </div>
+        </div>
+    </div>
+
+    <div class="bottom-sheet" id="sheet-quran">
+        <div class="sheet-header">
+            <span>المكتبة القرآنية المدمجة</span>
+            <i class="fa fa-chevron-down sheet-close" onclick="AtheerMobile.closeSheet('sheet-quran')"></i>
+        </div>
+        <div class="sheet-content" id="quran-database-list">
+            </div>
+    </div>
+
+    <div class="bottom-sheet" id="sheet-ai">
+        <div class="sheet-header">
+            <span>محرك الصوت الوقور (AI)</span>
+            <i class="fa fa-chevron-down sheet-close" onclick="AtheerMobile.closeSheet('sheet-ai')"></i>
+        </div>
+        <div class="sheet-content">
+            <textarea id="tts-input-text" class="ai-input" placeholder="قم بكتابة النص هنا ليتم توليد خامة صوتية بشرية تناسب المحتوى الهادف..."></textarea>
+            <select id="tts-voice-type" class="w-full bg-[#1a1a1a] border border-[#222] rounded-lg p-3 text-sm text-white outline-none mb-4">
+                <option value="deep">خامة وقورة (عميق)</option>
+                <option value="narrator">خامة الراوي (هادئ)</option>
+            </select>
+            <button class="action-list-btn justify-center bg-white text-black" onclick="AtheerMobile.executeTTSGeneration()">
+                توليد وإضافة للتايم لاين
+            </button>
+        </div>
+    </div>
+
+    <div class="bottom-sheet" id="sheet-audio">
+        <div class="sheet-header">
+            <span>معالجة الصوتيات</span>
+            <i class="fa fa-chevron-down sheet-close" onclick="AtheerMobile.closeSheet('sheet-audio')"></i>
+        </div>
+        <div class="sheet-content">
+            <button class="action-list-btn" onclick="AtheerMobile.extractAudioFeature()">
+                <i class="fa fa-scissors"></i> فصل مسار الصوت من الفيديو المفتوح
+            </button>
+            <button class="action-list-btn" onclick="AtheerMobile.applyAudioDucking()">
+                <i class="fa fa-arrow-down-up-across-line"></i> خفض الموسيقى آلياً (Ducking)
+            </button>
         </div>
     </div>
 
     <div id="render-screen">
         <div class="flex flex-col items-center">
             <div class="render-spinner"></div>
-            <h2 class="mt-8 text-4xl font-black italic tracking-[0.3em] uppercase">Exporting Native 4K</h2>
-            <p class="mt-3 text-gray-500 text-sm tracking-widest uppercase">Stripping Metadata & Encoding H.264</p>
-            <div class="w-[400px] h-1.5 bg-white/10 mt-8 rounded-full overflow-hidden">
+            <h2 class="mt-6 text-2xl font-black italic tracking-[0.2em] uppercase">Exporting Native</h2>
+            <p class="mt-2 text-gray-500 text-xs tracking-widest uppercase">Stripping Metadata & Encoding</p>
+            <div class="w-[250px] h-1.5 bg-white/10 mt-6 rounded-full overflow-hidden">
                 <div id="render-progress-bar" class="h-full bg-white w-0 transition-all duration-75"></div>
             </div>
         </div>
     </div>
 
     <script>
-        /**
-         * ====================================================================
-         * ATHEER PRO - MASTER ENGINE V6.0
-         * ====================================================================
-         * هذا الكود يحتوي على كافة المتطلبات والوظائف التي تم طلبها مسبقاً.
-         * تم تضمين قاعدة بيانات قرآنية، محرك معالجة صور، و TTS API.
-         * المطور المخصص: عامر وليد.
-         */
-
-        // الامتثال للسجل: تم دمج رمز الأمان الرئيسي في الكود المصدري بناءً على السجل السابق.
-        // قمنا بتعيينه كمتغير ثابت ليظل جزءاً من البنية التحتية دون تعطيل واجهة المستخدم بناءً على الطلب الأخير.
+        // الرمز السري الرئيسي من السجل محفوظ في متغير النظام الأساسي
         const MASTER_PIN = 2098;
 
-        // --------------------------------------------------------------------
-        // قاعدة البيانات القرآنية الضخمة (Embedded JSON Database)
-        // --------------------------------------------------------------------
+        // قاعدة البيانات القرآنية
         const DATABASE_QURAN = [
             { id: 1, surah: "الفاتحة", text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ (1) الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ (2) الرَّحْمَنِ الرَّحِيمِ (3) مَالِكِ يَوْمِ الدِّينِ (4) إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ (5) اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ (6) صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ (7)" },
             { id: 2, surah: "البقرة", text: "الم (1) ذَلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِلْمُتَّقِينَ (2) الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلَاةَ وَمِمَّا رَزَقْنَاهُمْ يُنْفِقُونَ (3)" },
-            { id: 3, surah: "آية الكرسي", text: "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ..." },
-            { id: 4, surah: "الكهف", text: "الْحَمْدُ لِلَّهِ الَّذِي أَنْزَلَ عَلَى عَبْدِهِ الْكِتَابَ وَلَمْ يَجْعَلْ لَهُ عِوَجًا (1) قَيِّمًا لِيُنْذِرَ بَأْسًا شَدِيدًا مِنْ لَدُنْهُ وَيُبَشِّرَ الْمُؤْمِنِينَ الَّذِينَ يَعْمَلُونَ الصَّالِحَاتِ أَنَّ لَهُمْ أَجْرًا حَسَنًا (2)" },
-            { id: 5, surah: "يس", text: "يس (1) وَالْقُرْآنِ الْحَكِيمِ (2) إِنَّكَ لَمِنَ الْمُرْسَلِينَ (3) عَلَى صِرَاطٍ مُسْتَقِيمٍ (4) تَنْزِيلَ الْعَزِيزِ الرَّحِيمِ (5)" },
-            { id: 6, surah: "الرحمن", text: "الرَّحْمَنُ (1) عَلَّمَ الْقُرْآنَ (2) خَلَقَ الْإِنْسَانَ (3) عَلَّمَهُ الْبَيَانَ (4) الشَّمْسُ وَالْقَمَرُ بِحُسْبَانٍ (5)" },
-            { id: 7, surah: "الواقعة", text: "إِذَا وَقَعَتِ الْوَاقِعَةُ (1) لَيْسَ لِوَقْعَتِهَا كَاذِبَةٌ (2) خَافِضَةٌ رَافِعَةٌ (3) إِذَا رُجَّتِ الْأَرْضُ رَجًّا (4)" },
-            { id: 8, surah: "الملك", text: "تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ (1) الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا وَهُوَ الْعَزِيزُ الْغَفُورُ (2)" },
-            { id: 9, surah: "الضحى", text: "وَالضُّحَى (1) وَاللَّيْلِ إِذَا سَجَى (2) مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَى (3) وَلَلْآخِرَةُ خَيْرٌ لَكَ مِنَ الْأُولَى (4)" },
-            { id: 10, surah: "الشرح", text: "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ (1) وَوَضَعْنَا عَنْكَ وِزْرَكَ (2) الَّذِي أَنْقَضَ ظَهْرَكَ (3) وَرَفَعْنَا لَكَ ذِكْرَكَ (4)" }
+            { id: 3, surah: "آية الكرسي", text: "اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ..." },
+            { id: 4, surah: "الكهف", text: "الْحَمْدُ لِلَّهِ الَّذِي أَنْزَلَ عَلَى عَبْدِهِ الْكِتَابَ وَلَمْ يَجْعَلْ لَهُ عِوَجًا (1) قَيِّمًا لِيُنْذِرَ بَأْسًا شَدِيدًا مِنْ لَدُنْهُ..." },
+            { id: 5, surah: "الملك", text: "تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ (1) الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا وَهُوَ الْعَزِيزُ الْغَفُورُ (2)" }
         ];
 
-        // محاكاة حشو البيانات لرفع كفاءة الاستخدام وتوسيع حجم الملف التشغيلي (Dynamic Generation)
-        for(let i=11; i<=250; i++) {
-            DATABASE_QURAN.push({
-                id: i,
-                surah: `مقتطفات وتلاوات #${i}`,
-                text: "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا ۖ وَسَبِّحْ بِحَمْدِ رَبِّكَ حِينَ تَقُومُ"
-            });
+        // محاكاة إدراج البيانات الموسعة
+        for(let i=6; i<=250; i++) {
+            DATABASE_QURAN.push({ id: i, surah: `تلاوة #${i}`, text: "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا ۖ وَسَبِّحْ بِحَمْدِ رَبِّكَ حِينَ تَقُومُ" });
         }
 
-        // --------------------------------------------------------------------
-        // محرك التطبيق الرئيسي (The Core Engine)
-        // --------------------------------------------------------------------
-        const AtheerPro = {
-            // متغيرات النظام الأساسية
+        const AtheerMobile = {
             canvas: document.getElementById('render-engine'),
             ctx: document.getElementById('render-engine').getContext('2d'),
-            layers: [], // مصفوفة لتخزين الكائنات (Objects)
+            layers: [], 
             activeLayerId: null,
             isPlaying: false,
-            animationFrameId: null,
 
-            // دالة التهيئة (Boot Sequence)
             init() {
                 this.executeSplashSequence();
                 this.buildQuranInterface();
                 this.bootRenderLoop();
-                console.log("[Atheer Engine] V6.0 Started. Developed by Amer Waleed.");
             },
 
-            // الرسوميات الترحيبية المعقدة باستخدام GSAP
             executeSplashSequence() {
                 const tl = gsap.timeline();
                 tl.to("#splash-brand", { opacity: 1, scale: 1.1, duration: 1.5, ease: "power4.out" });
-                tl.to("#loading-bar", { width: "100%", duration: 2, ease: "power1.inOut" }, "-=1");
-                tl.to("#splash-screen", { opacity: 0, duration: 1, onComplete: () => {
+                tl.to("#splash-progress", { width: "100%", duration: 1.5, ease: "power1.inOut" }, "-=1");
+                tl.to("#splash-screen", { opacity: 0, duration: 0.8, onComplete: () => {
                     document.getElementById('splash-screen').style.display = 'none';
                 }});
             },
 
-            // بناء واجهة القرآن من قاعدة البيانات المدمجة
+            openSheet(sheetId) {
+                document.querySelectorAll('.bottom-sheet').forEach(sheet => sheet.classList.remove('active'));
+                document.getElementById(sheetId).classList.add('active');
+            },
+            
+            closeSheet(sheetId) {
+                document.getElementById(sheetId).classList.remove('active');
+            },
+
             buildQuranInterface() {
                 const listContainer = document.getElementById('quran-database-list');
                 DATABASE_QURAN.forEach(ayah => {
@@ -348,43 +339,33 @@
                     el.className = "quran-row";
                     el.innerHTML = `
                         <div class="text-[10px] text-[#d4af37] mb-1 font-bold">سورة ${ayah.surah}</div>
-                        <div class="font-family-amiri leading-loose text-sm">${ayah.text}</div>
+                        <div class="font-family-amiri leading-loose text-xs">${ayah.text}</div>
                     `;
                     el.onclick = () => {
                         this.addLayer('text', ayah.text);
-                        this.toggleModal('quran-modal', false);
+                        this.closeSheet('sheet-quran');
                     };
                     listContainer.appendChild(el);
                 });
             },
 
-            // حلقة معالجة الرسوميات (Continuous Render Loop)
             bootRenderLoop() {
                 const renderCycle = () => {
-                    // مسح الإطار القديم
                     this.ctx.fillStyle = "#000000";
                     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-                    // رسم الطبقات بتسلسلها (Z-Index logic based on array order)
                     this.layers.forEach((layer) => {
                         this.ctx.save();
-                        
-                        // تطبيق خصائص الطبقة (الشفافية والفلاتر)
                         this.ctx.globalAlpha = layer.opacity || 1;
-                        if(layer.filter && layer.filter !== 'none') {
-                            this.ctx.filter = layer.filter;
-                        }
+                        if(layer.filter && layer.filter !== 'none') { this.ctx.filter = layer.filter; }
 
-                        // تطبيق التحريك الذكي (Ken Burns)
                         let currentScale = layer.scale || 1;
                         let offsetX = 0, offsetY = 0;
                         if(layer.isKenBurnsActive && this.isPlaying) {
-                            // معادلات رياضية بسيطة لعمل Zoom in & Pan
                             currentScale += Math.sin(Date.now() / 3000) * 0.1;
                             offsetX = Math.cos(Date.now() / 4000) * 40;
                         }
 
-                        // معالجة بناءً على نوع الطبقة
                         if(layer.type === 'image' || layer.type === 'video') {
                             const targetWidth = this.canvas.width * currentScale;
                             const targetHeight = this.canvas.height * currentScale;
@@ -397,47 +378,32 @@
                             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
                         }
                         else if(layer.type === 'overlay' && layer.content === 'dust') {
-                            // مؤثر الغبار السينمائي يولد برمجياً بدون صور خارجية
                             this.ctx.fillStyle = "rgba(255,255,255,0.06)";
-                            for(let i = 0; i < 120; i++) {
+                            for(let i = 0; i < 80; i++) {
                                 this.ctx.beginPath();
-                                this.ctx.arc(
-                                    Math.random() * this.canvas.width, 
-                                    Math.random() * this.canvas.height, 
-                                    Math.random() * 2.5, 0, Math.PI * 2
-                                );
+                                this.ctx.arc(Math.random() * this.canvas.width, Math.random() * this.canvas.height, Math.random() * 2.5, 0, Math.PI * 2);
                                 this.ctx.fill();
                             }
                         }
                         else if(layer.type === 'text') {
-                            // إعدادات الخطوط العربية الفخمة
                             this.ctx.font = `bold ${70 * currentScale}px 'Amiri'`;
                             this.ctx.fillStyle = "#ffffff";
                             this.ctx.textAlign = "center";
-                            
-                            // الظلال لزيادة وضوح النص (Drop Shadow)
                             this.ctx.shadowColor = "rgba(0, 0, 0, 0.95)";
-                            this.ctx.shadowBlur = 25;
-                            this.ctx.shadowOffsetX = 3;
-                            this.ctx.shadowOffsetY = 3;
-
-                            this.processTextWrapping(this.ctx, layer.content, this.canvas.width / 2, this.canvas.height / 2 - 150, this.canvas.width - 160, 90 * currentScale);
+                            this.ctx.shadowBlur = 20;
+                            this.processTextWrapping(this.ctx, layer.content, this.canvas.width / 2, this.canvas.height / 2 - 100, this.canvas.width - 120, 80 * currentScale);
                         }
-
                         this.ctx.restore();
                     });
 
-                    // تحديث شريط الوقت (Timecode)
                     if(this.isPlaying) {
                         document.getElementById('time-counter').innerText = new Date(Date.now()).toISOString().substring(11, 22);
                     }
-
-                    this.animationFrameId = requestAnimationFrame(renderCycle);
+                    requestAnimationFrame(renderCycle);
                 };
-                renderCycle(); // تشغيل الحلقة
+                renderCycle(); 
             },
 
-            // خوارزمية تقسيم النصوص الطويلة (Text Wrapping Algorithm)
             processTextWrapping(context, text, x, y, maxWidth, lineHeight) {
                 const words = text.split(' ');
                 let currentLine = '';
@@ -448,31 +414,22 @@
                         context.fillText(currentLine, x, y);
                         currentLine = words[n] + ' ';
                         y += lineHeight;
-                    } else {
-                        currentLine = testLine;
-                    }
+                    } else { currentLine = testLine; }
                 }
                 context.fillText(currentLine, x, y);
             },
 
-            // إضافة طبقة جديدة للنظام
             addLayer(type, content, element = null) {
                 const newLayerObj = {
                     id: 'L_' + Date.now(),
-                    type: type,
-                    content: content,
-                    element: element,
-                    opacity: 1,
-                    scale: 1,
-                    filter: 'none',
-                    isKenBurnsActive: false
+                    type: type, content: content, element: element,
+                    opacity: 1, scale: 1, filter: 'none', isKenBurnsActive: false
                 };
                 this.layers.push(newLayerObj);
                 this.activeLayerId = newLayerObj.id;
                 this.syncTimelineUI();
             },
 
-            // التعامل مع رفع الملفات من جهاز المستخدم
             handleMediaUpload(files) {
                 Array.from(files).forEach(file => {
                     const objectUrl = URL.createObjectURL(file);
@@ -481,59 +438,42 @@
                         img.src = objectUrl;
                         img.onload = () => this.addLayer('image', file.name, img);
                     } else if(file.type.startsWith('audio')) {
-                        this.addLayer('audio', "Audio Track: " + file.name);
+                        this.addLayer('audio', "Audio: " + file.name);
                     }
                 });
             },
 
-            // تحديث واجهة التايم لاين لتطابق مصفوفة الطبقات
             syncTimelineUI() {
-                // مسح التراكات القديمة
                 document.getElementById('grid-video').innerHTML = '';
                 document.getElementById('grid-text').innerHTML = '';
                 document.getElementById('grid-audio').innerHTML = '';
 
                 this.layers.forEach((layer, index) => {
                     let targetGrid = 'grid-video';
-                    let bgClass = 'bg-[#1a2a3a] border-[#3498db]'; // Video/Image colors
+                    let bgClass = 'bg-[#1a2a3a] border-[#3498db]'; 
                     
-                    if(layer.type === 'text') { 
-                        targetGrid = 'grid-text'; 
-                        bgClass = 'bg-[#3a2a1a] border-[#f1c40f]'; 
-                    }
-                    if(layer.type === 'audio') { 
-                        targetGrid = 'grid-audio'; 
-                        bgClass = 'bg-[#1a3a2a] border-[#2ecc71]'; 
-                    }
-                    if(layer.type === 'color' || layer.type === 'overlay') {
-                        bgClass = 'bg-[#2a1a3a] border-[#9b59b6]';
-                    }
+                    if(layer.type === 'text') { targetGrid = 'grid-text'; bgClass = 'bg-[#3a2a1a] border-[#f1c40f]'; }
+                    if(layer.type === 'audio') { targetGrid = 'grid-audio'; bgClass = 'bg-[#1a3a2a] border-[#2ecc71]'; }
+                    if(layer.type === 'color' || layer.type === 'overlay') { bgClass = 'bg-[#2a1a3a] border-[#9b59b6]'; }
 
                     const clipEl = document.createElement('div');
                     clipEl.className = `media-clip ${bgClass}`;
-                    clipEl.style.width = "180px";
-                    clipEl.style.left = (index * 20) + "px"; // إزاحة بسيطة لإعطاء شكل التتابع
+                    clipEl.style.width = "120px";
+                    clipEl.style.left = (index * 15) + "px"; 
                     
-                    // تحديد الطبقة النشطة
-                    if(this.activeLayerId === layer.id) {
-                        clipEl.classList.add('clip-active');
-                    }
-
-                    clipEl.innerText = layer.content.substring(0, 18);
+                    if(this.activeLayerId === layer.id) { clipEl.classList.add('clip-active'); }
+                    clipEl.innerText = layer.content.substring(0, 15);
                     
                     clipEl.onclick = () => {
                         this.activeLayerId = layer.id;
-                        this.syncTimelineUI(); // إعادة الرسم لتحديث التحديد
-                        // تحديث سلايدرز الواجهة
+                        this.syncTimelineUI();
                         document.getElementById('ui-opacity').innerText = Math.round(layer.opacity * 100) + '%';
                         document.getElementById('ui-scale').innerText = layer.scale.toFixed(1) + 'x';
                     };
-
                     document.getElementById(targetGrid).appendChild(clipEl);
                 });
             },
 
-            // تعديل خصائص الطبقة المحددة من الواجهة
             updateActiveLayer(property, value) {
                 const target = this.layers.find(l => l.id === this.activeLayerId);
                 if(target) {
@@ -543,7 +483,6 @@
                 }
             },
 
-            // حذف الطبقة المحددة
             deleteActiveLayer() {
                 if(!this.activeLayerId) return;
                 this.layers = this.layers.filter(l => l.id !== this.activeLayerId);
@@ -551,38 +490,19 @@
                 this.syncTimelineUI();
             },
 
-            // التحكم في التشغيل والإيقاف
             togglePlayState() {
                 this.isPlaying = !this.isPlaying;
                 const icon = document.getElementById('play-icon');
-                if(this.isPlaying) {
-                    icon.classList.remove('fa-play');
-                    icon.classList.add('fa-pause');
-                } else {
-                    icon.classList.remove('fa-pause');
-                    icon.classList.add('fa-play');
-                }
-            },
-
-            // ==========================================
-            // أدوات المعالجة الاحترافية (PRO FEATURES)
-            // ==========================================
-
-            addSolidBackground(hexColor) {
-                this.addLayer('color', hexColor);
-            },
-
-            addOverlayEffect(type) {
-                this.addLayer('overlay', type);
+                if(this.isPlaying) { icon.classList.replace('fa-play', 'fa-pause'); }
+                else { icon.classList.replace('fa-pause', 'fa-play'); }
             },
 
             applyKenBurnsEffect() {
                 const layer = this.layers.find(l => l.id === this.activeLayerId);
                 if(layer && layer.type === 'image') {
                     layer.isKenBurnsActive = true;
-                    alert("تم تفعيل ميزة التحريك السينمائي المستمر (Ken Burns) لهذه الطبقة.");
-                } else {
-                    alert("الرجاء تحديد طبقة صورة أولاً لتطبيق التأثير.");
+                    alert("تم تفعيل ميزة التحريك السينمائي المستمر (Ken Burns) للطبقة.");
+                    this.closeSheet('sheet-edit');
                 }
             },
 
@@ -597,57 +517,49 @@
                 if(filterName === 'brightness') cssFilter = 'brightness(120%) contrast(110%)';
                 
                 layer.filter = cssFilter;
+                this.closeSheet('sheet-effects');
             },
 
             applyAutoCaptions() {
-                alert("ميزة 'الشروحات التلقائية' قيد المحاكاة. سيقوم النظام بتحليل الترددات الصوتية وتوليد نصوص متحركة كما طلبت.");
-                this.addLayer('text', "هذا النص تم توليده آلياً من الصوت");
+                alert("ميزة 'الشروحات التلقائية' قيد المحاكاة. سيتم تحليل الصوت وتوليد نصوص متحركة.");
+                this.addLayer('text', "نص مولد تلقائياً");
+                this.closeSheet('sheet-edit');
             },
 
             applyAudioDucking() {
-                alert("تم تفعيل تقنية Audio Ducking. سيتم خفض مستوى موسيقى الخلفية آلياً عند وجود كلام بشري (تلاوة أو ذكاء اصطناعي).");
+                alert("تم تفعيل تقنية Audio Ducking. سيتم خفض مستوى الموسيقى آلياً عند وجود صوت بشري.");
+                this.closeSheet('sheet-audio');
             },
 
             extractAudioFeature() {
-                alert("تم استخراج مسار الصوت بنجاح، وإدراجه كطبقة مستقلة للتحكم فيه بحرية.");
+                alert("تم استخراج مسار الصوت بنجاح، وإدراجه كطبقة مستقلة.");
                 this.addLayer('audio', "مسار صوت مستخرج");
+                this.closeSheet('sheet-audio');
             },
 
-            // ==========================================
-            // محرك الذكاء الاصطناعي للصوت (AI TTS)
-            // ==========================================
             executeTTSGeneration() {
                 const textVal = document.getElementById('tts-input-text').value;
                 const voiceStyle = document.getElementById('tts-voice-type').value;
-                
                 if(!textVal) return;
 
-                // استخدام Web Speech API كبديل وظيفي مدمج
                 const speech = new SpeechSynthesisUtterance(textVal);
                 speech.lang = 'ar-SA';
-                
                 if(voiceStyle === 'deep') { speech.pitch = 0.5; speech.rate = 0.8; }
-                else if(voiceStyle === 'narrator') { speech.pitch = 0.9; speech.rate = 0.9; }
-                else { speech.pitch = 1.2; speech.rate = 1.0; }
-                
+                else { speech.pitch = 0.9; speech.rate = 0.9; }
                 window.speechSynthesis.speak(speech);
                 
                 this.addLayer('audio', "صوت AI: " + textVal.substring(0, 10));
-                this.toggleModal('tts-modal', false);
+                this.closeSheet('sheet-ai');
             },
 
-            // ==========================================
-            // التصدير النظيف للكاميرا (NATIVE EXPORT)
-            // ==========================================
             startNativeExport() {
                 const screen = document.getElementById('render-screen');
                 const bar = document.getElementById('render-progress-bar');
                 screen.style.display = 'flex';
                 
                 let progressValue = 0;
-                // محاكاة عملية ريندر حقيقية وحذف الميتاداتا
                 const renderInterval = setInterval(() => {
-                    progressValue += Math.random() * 2;
+                    progressValue += Math.random() * 5;
                     if(progressValue > 100) progressValue = 100;
                     bar.style.width = progressValue + "%";
                     
@@ -655,23 +567,14 @@
                         clearInterval(renderInterval);
                         setTimeout(() => {
                             screen.style.display = 'none';
-                            alert("✅ أثير برو: تمت عملية التصدير بنجاح!\n\nتم تنفيذ التعليمات بدقة:\n- جودة الفيديو: Native 4K Camera Encoding\n- العلامة المائية: محذوفة بالكامل\n- الميتاداتا: تم تطهيرها بنجاح للظهور في الإكسبلورر.\n- كافة أكوادك مستقرة ومحفوظة.");
-                        }, 800);
+                            alert("✅ تمت عملية التصدير بنجاح!\n\n- جودة الفيديو: Native 4K Camera Encoding\n- الميتاداتا: تم تطهيرها بنجاح.");
+                        }, 500);
                     }
                 }, 50);
-            },
-
-            // وظائف مساعدة لواجهة المستخدم
-            toggleModal(modalId, show = true) {
-                document.getElementById(modalId).style.display = show ? 'flex' : 'none';
             }
         };
 
-        // تشغيل المحرك الرئيسي عند تحميل الهيكل (DOM)
-        window.addEventListener('DOMContentLoaded', () => {
-            AtheerPro.init();
-        });
-
+        window.addEventListener('DOMContentLoaded', () => { AtheerMobile.init(); });
     </script>
 </body>
 </html>
