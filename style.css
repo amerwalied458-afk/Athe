@@ -1,0 +1,756 @@
+/* ==========================================================================
+    PROJECT: ATHEER PRO - VIDEO EDITOR ENGINE V12.0
+    DEVELOPER: AMER WALEED (SYSTEM ARCHITECT)
+    MODULE: UI/UX MASTER STYLESHEET
+    DESCRIPTION: FULLY EXPANDED INSHOT/CAPCUT STYLE ARCHITECTURE
+    ==========================================================================
+*/
+
+:root {
+    /* لوحة الألوان الأساسية - الهوية البصرية (Luxury Black & InShot Red) */
+    --bg-main: #000000;
+    --bg-surface: #0a0a0a;
+    --bg-elevated: #151515;
+    --bg-panel: #1a1a1a;
+    --bg-active: #222222;
+    
+    --accent-red: #f34e5d;      /* لون إنشوت الأساسي */
+    --accent-gold: #d4af37;     /* اللون الذهبي للبريميوم */
+    --accent-blue: #3b82f6;     /* مسار الفيديو */
+    --accent-orange: #f97316;   /* مسار النصوص */
+    --accent-green: #10b981;    /* مسار الصوت */
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --text-dim: #666666;
+    
+    --border-dim: #1f1f1f;
+    --border-light: #333333;
+    
+    --header-h: 65px;
+    --footer-h: 80px;
+    --timeline-h: 35vh;
+    
+    --safe-area-top: env(safe-area-inset-top);
+    --safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+/* ==========================================================================
+   1. الضبط العام (GLOBAL RESET & BASE)
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none !important;
+}
+
+body, html {
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Tajawal', sans-serif;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+/* تخصيص السكرول بار (Custom Scrollbars) */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   2. شاشة الترحيب (SPLASH SCREEN ARCHITECTURE)
+   ========================================================================== */
+.splash-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-logo-text {
+    font-family: 'Amiri', serif;
+    font-size: 9rem;
+    font-weight: 900;
+    background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.15));
+    animation: logoReveal 1.5s ease-out forwards;
+}
+
+.progress-container {
+    width: 240px;
+    height: 3px;
+    background: #222;
+    margin-top: 40px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--accent-red);
+    box-shadow: 0 0 20px var(--accent-red);
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.loading-status {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-text {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.version-tag {
+    font-size: 9px;
+    color: var(--accent-gold);
+    font-weight: 900;
+}
+
+.developer-credits {
+    position: absolute;
+    bottom: 50px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 2.2;
+    letter-spacing: 1px;
+}
+
+.developer-credits strong {
+    color: #fff;
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   3. تخطيط التطبيق الرئيسي (APPLICATION FRAMEWORK)
+   ========================================================================== */
+.app-viewport {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    width: 100vw;
+    background: var(--bg-main);
+}
+
+/* الهيدر العلوي */
+.app-header {
+    height: var(--header-h);
+    background: var(--bg-main);
+    border-bottom: 1px solid var(--border-dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    flex-shrink: 0;
+}
+
+.brand-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+.badge-premium {
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(243, 78, 93, 0.3);
+}
+
+.btn-primary-action {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary-action:active {
+    transform: scale(0.92);
+}
+
+/* ==========================================================================
+   4. مساحة المعاينة (PREVIEW & CANVAS WORKSPACE)
+   ========================================================================== */
+.preview-workspace {
+    flex: 1;
+    background: #050505;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.canvas-holder {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 9/16;
+    background: #000;
+    border-radius: 16px;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 20px 60px rgba(0,0,0,1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-render-canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* شريط التحكم في المعاينة */
+.media-playback-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15,15,15,0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid #333;
+    padding: 12px 35px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    z-index: 500;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.playback-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.playback-btn.primary-play {
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.playback-btn:active {
+    transform: scale(0.9);
+}
+
+/* ==========================================================================
+   5. محرك التايم لاين (TIMELINE ENGINE STYLES)
+   ========================================================================== */
+.editor-timeline {
+    height: var(--timeline-h);
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border-dim);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.timeline-header-tools {
+    height: 45px;
+    background: #0a0a0a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid #111;
+}
+
+.action-icon {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.action-icon.danger {
+    color: #ef4444;
+}
+
+.action-icon:active {
+    background: #222;
+}
+
+.digital-clock {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    color: var(--accent-red);
+    font-weight: 900;
+    background: #000;
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid #1a1a1a;
+}
+
+/* السكرولر والمسارات */
+.tracks-scroller {
+    flex: 1;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #050505;
+}
+
+.ruler-container {
+    height: 30px;
+    background: #080808;
+    border-bottom: 1px solid #151515;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+}
+
+.time-seeker-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent-red);
+    left: 50%; /* Playhead fixed in middle or start */
+    z-index: 60;
+    pointer-events: none;
+    box-shadow: 0 0 15px var(--accent-red);
+}
+
+.time-seeker-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 12px;
+    height: 12px;
+    background: var(--accent-red);
+    border-radius: 50%;
+}
+
+.track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 10px;
+}
+
+.track-item {
+    height: 55px;
+    background: #0a0a0a;
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid #050505;
+}
+
+.track-label {
+    width: 50px;
+    background: #000;
+    border-right: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    z-index: 40;
+    flex-shrink: 0;
+}
+
+.track-content-area {
+    flex: 1;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: repeating-linear-gradient(90deg, #0a0a0a, #0a0a0a 39px, #111 40px);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.track-content-area::-webkit-scrollbar {
+    display: none;
+}
+
+/* تصميم الكليبات (Clips Style) */
+.media-clip-obj {
+    position: absolute;
+    height: 42px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 11px;
+    font-weight: 900;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.video-obj { background: var(--accent-blue); border-right: 4px solid #1e3a8a; }
+.text-obj { background: var(--accent-orange); border-right: 4px solid #7c2d12; }
+.audio-obj { background: var(--accent-green); border-right: 4px solid #064e3b; }
+
+.clip-selected {
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    z-index: 100;
+}
+
+/* ==========================================================================
+   6. شريط الأدوات السفلي (BOTTOM TOOL NAVIGATION)
+   ========================================================================== */
+.main-bottom-nav {
+    height: var(--footer-h);
+    background: #000;
+    border-top: 1px solid var(--border-dim);
+    display: flex;
+    overflow-x: auto;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+    flex-shrink: 0;
+    padding-bottom: var(--safe-area-bottom);
+}
+
+.main-bottom-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-tool-item {
+    flex: 0 0 75px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-tool-item i {
+    font-size: 22px;
+    color: #fff;
+}
+
+.nav-tool-item span {
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.nav-tool-item:active i {
+    color: var(--accent-red);
+    transform: translateY(-5px);
+}
+
+/* ==========================================================================
+   7. النوافذ السفلية المنبثقة (BOTTOM SHEETS ARCHITECTURE)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 5000;
+    display: none;
+}
+
+.bottom-sheet-panel {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    max-height: 85vh;
+    background: var(--bg-elevated);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    z-index: 6000;
+    display: flex;
+    flex-direction: column;
+    transition: bottom 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    border-top: 1px solid #333;
+    box-shadow: 0 -20px 60px rgba(0,0,0,1);
+}
+
+.bottom-sheet-panel.is-active {
+    bottom: 0;
+}
+
+.sheet-header-box {
+    height: 70px;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+}
+
+.sheet-title {
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.btn-close-sheet {
+    width: 35px;
+    height: 35px;
+    background: #333;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+}
+
+.sheet-content-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+}
+
+/* عناصر التحكم داخل القوائم */
+.control-unit {
+    margin-bottom: 30px;
+}
+
+.unit-label-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.unit-val {
+    color: #fff;
+    font-family: monospace;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    border: 4px solid var(--accent-red);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.action-strip-btn {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    padding: 18px;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.action-strip-btn i {
+    color: var(--accent-red);
+    font-size: 20px;
+}
+
+/* ==========================================================================
+   8. شاشة التصدير (EXPORT PROCESSING OVERLAY)
+   ========================================================================== */
+.export-modal {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 100000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.render-spinner {
+    width: 80px;
+    height: 80px;
+    border: 4px solid #1a1a1a;
+    border-top-color: var(--accent-red);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.render-title {
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.render-subtitle {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.render-progress-wrapper {
+    width: 300px;
+    height: 4px;
+    background: #111;
+    margin-top: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.render-fill {
+    width: 0%;
+    height: 100%;
+    background: #fff;
+    transition: width 0.1s linear;
+}
+
+.render-percent {
+    margin-top: 20px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   9. الرسوم المتحركة (ANIMATION REPOSITORY)
+   ========================================================================== */
+@keyframes logoReveal {
+    from { transform: scale(0.8); opacity: 0; filter: blur(20px); }
+    to { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+/* ==========================================================================
+   10. مكتبة القرآن والذكاء الاصطناعي (SPECIFIC STYLES)
+   ========================================================================== */
+.quran-item-row {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #222;
+    cursor: pointer;
+}
+
+.quran-item-row:active {
+    border-color: var(--accent-gold);
+}
+
+.surah-name {
+    color: var(--accent-gold);
+    font-weight: 900;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.ayah-text {
+    font-family: 'Amiri', serif;
+    font-size: 16px;
+    line-height: 2;
+}
+
+.ai-textarea {
+    width: 100%;
+    height: 150px;
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 20px;
+    color: #fff;
+    font-family: inherit;
+    resize: none;
+    font-size: 14px;
+}
